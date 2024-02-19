@@ -1,7 +1,6 @@
 import { supabase } from '../../src/utils/supabase.js';
 
 export default async (req, res) => {
-  console.log('has been called');
   if (req.method === 'GET') {
     let { data, error } = await supabase.from('posts').select();
     res.json({
@@ -16,9 +15,8 @@ export default async (req, res) => {
     });
   } else if (req.method === 'POST') {
     const { name, tag, description } = req.body;
-    console.log(req.body, 'body', req.headers, 'header');
     if (!name || !tag || !description) {
-      return res.json({
+      return res.status(400).json({
         error:
           'One of these fields is required [ name ] or [ tag ] or [ description ]',
       });
