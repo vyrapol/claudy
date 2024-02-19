@@ -1,6 +1,7 @@
 import { supabase } from '../../src/utils/supabase.js';
 
 export default async (req, res) => {
+  console.log('has been called');
   if (req.method === 'GET') {
     let { data, error } = await supabase.from('posts').select();
     res.json({
@@ -15,6 +16,7 @@ export default async (req, res) => {
     });
   } else if (req.method === 'POST') {
     const { name, tag, description } = req.body;
+    console.log(req.body, 'body');
     if (!name || !tag || !description) {
       return res.json({
         error:
