@@ -16,7 +16,7 @@ export default async (req, res) => {
     });
   } else if (req.method === 'POST') {
     const { name, tag, description } = req.body;
-    console.log(req.body, 'body');
+    console.log(req.body, 'body', req.headers, 'header');
     if (!name || !tag || !description) {
       return res.json({
         error:
