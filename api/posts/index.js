@@ -19,6 +19,7 @@ export default async (req, res) => {
       return res.status(400).json({
         error:
           'One of these fields is required [ name ] or [ tag ] or [ description ]',
+        payload: JSON.stringify(req.body)
       });
     }
     let { data, error, statusText } = await supabase
