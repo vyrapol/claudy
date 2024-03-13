@@ -2,7 +2,7 @@ import { supabase } from '../../src/utils/supabase.js';
 
 export default async (req, res) => {
   if (req.method === 'GET') {
-    let { data, error } = await supabase.from('posts').select();
+    let { data, error } = await supabase.from('logs').select();
     res.json({
       method: 'GET',
       message: 'Howdy, watchu doing here lil bro ?',
@@ -14,17 +14,17 @@ export default async (req, res) => {
       error,
     });
   } else if (req.method === 'POST') {
-    const { name, tag, description } = req.body;
-    if (!name || !tag || !description) {
-      return res.status(400).json({
-        error:
-          'One of these fields is required [ name ] or [ tag ] or [ description ]',
-        payload: JSON.stringify(req.body)
-      });
-    }
+    // const { name, tag, description } = req.body;
+    // if (!name || !tag || !description) {
+    //   return res.status(400).json({
+    //     error:
+    //       'One of these fields is required [ name ] or [ tag ] or [ description ]',
+    //     payload: JSON.stringify(req.body)
+    //   });
+    // }
     let { data, error, statusText } = await supabase
-      .from('posts')
-      .insert([{ ...req.body }])
+      .from('logs')
+      .insert([{ log: JSON.stringify(req.body) }])
       .select();
     res.json({
       method: 'POST',
