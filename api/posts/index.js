@@ -22,7 +22,7 @@ export default async (req, res) => {
     //     payload: JSON.stringify(req.body)
     //   });
     // }
-    console.log(JSON.stringify(req.body))
+    console.log(req.body)
     let { data, error, statusText } = await supabase
       .from('logs')
       .insert([{ log: JSON.stringify(req.body) }])
